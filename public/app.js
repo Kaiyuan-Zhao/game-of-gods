@@ -61,13 +61,6 @@ async function sendMessage(chatId, userMessage) {
 		addBubble(chatId, 'model', reply)
 		chat.history.push({ role: 'user', text: userMessage })
 		chat.history.push({ role: 'model', text: reply })
-
-		if (reply.toLowerCase().includes('win')) {
-			const winControls = document.querySelector('.win-controls')
-			winControls.classList.add('visible')
-			chat.messages.appendChild(winControls)
-			chat.messages.scrollTop = chat.messages.scrollHeight
-		}
 	} catch (error) {
 		addSystem(chatId, error instanceof Error ? error.message : 'Something went wrong')
 	} finally {

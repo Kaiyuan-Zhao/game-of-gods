@@ -88,44 +88,6 @@ body {
 	font-size: 1.02rem;
 }
 
-.win-controls {
-	display: none;
-	align-items: center;
-	gap: 10px;
-	margin: 0 0 12px;
-}
-
-.win-controls.visible {
-	display: flex;
-}
-
-#win-btn {
-	padding: 10px 16px;
-	border: 4px solid #111827;
-	border-radius: 999px;
-	font-weight: 800;
-	cursor: pointer;
-	background: #111827;
-	color: #fff;
-	transition: all 200ms;
-}
-
-#win-btn:hover {
-	border-style: dashed;
-}
-
-#win-btn:disabled {
-	opacity: 0.6;
-	cursor: not-allowed;
-}
-
-#win-status {
-	margin: 0;
-	font-size: 0.95rem;
-	font-weight: 700;
-	color: #4b5563;
-}
-
 .chat-grid {
 	display: grid;
 	grid-template-columns: 1fr;

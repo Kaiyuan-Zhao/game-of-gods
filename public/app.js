@@ -45,7 +45,14 @@ async function sendMessage(chatId, userMessage) {
 			})
 		})
 
-		const data = await response.json()
+		const textResponse = await response.text()
+		let data
+		try {
+			data = JSON.parse(textResponse)
+		} catch (e) {
+			throw new Error(response.ok ? 'Invalid JSON response from server' : `Server Error: ${response.status} - ${textResponse.slice(0, 40)}...`)
+		}
+
 		if (!response.ok) {
 			throw new Error(data?.error || 'Request failed')
 		}
@@ -56,7 +63,10 @@ async function sendMessage(chatId, userMessage) {
 		chat.history.push({ role: 'model', text: reply })
 
 		if (reply.toLowerCase().includes('win')) {
-			document.querySelector('.win-controls').classList.add('visible')
+			const winControls = document.querySelector('.win-controls')
+			winControls.classList.add('visible')
+			chat.messages.appendChild(winControls)
+			chat.messages.scrollTop = chat.messages.scrollHeight
 		}
 	} catch (error) {
 		addSystem(chatId, error instanceof Error ? error.message : 'Something went wrong')

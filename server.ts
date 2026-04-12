@@ -1,6 +1,17 @@
 import { join } from 'path'
 
 const publicDir = join(import.meta.dir, 'public')
+
+function trimTrailingSlash(value: string): string {
+	return value.replace(/\/+$/, '')
+}
+
+function injectJigsawPlaceholders(html: string): string {
+	const apiOrigin = trimTrailingSlash((process.env.JIGSAW_API_ORIGIN || 'http://localhost:8787').trim())
+	const arcadeUrl = trimTrailingSlash((process.env.JIGSAW_ARCADE_URL || 'http://localhost:5173/arcade').trim())
+	return html.replaceAll('__JIGSAW_API_ORIGIN__', apiOrigin).replaceAll('__JIGSAW_ARCADE_URL__', arcadeUrl)
+}
+
 const promptAPath = join(import.meta.dir, 'Agent A.txt')
 const promptBPath = join(import.meta.dir, 'Agent B.txt')
 
@@ -94,6 +105,15 @@ Bun.serve({
 		}
 
 		const filePath = url.pathname === '/' ? 'index.html' : url.pathname.slice(1)
+		if (filePath === 'index.html' || url.pathname === '/') {
+			const indexPath = join(publicDir, 'index.html')
+			const raw = await Bun.file(indexPath).text()
+			const body = injectJigsawPlaceholders(raw)
+			return new Response(body, {
+				headers: { 'content-type': 'text/html; charset=utf-8' },
+			})
+		}
+
 		const file = Bun.file(join(publicDir, filePath))
 		if (await file.exists()) {
 			return new Response(file)

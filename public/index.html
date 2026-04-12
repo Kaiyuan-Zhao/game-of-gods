@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Game of Gods</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<main class="page">
+			<header class="header">
+				<h1>Game of Gods</h1>
+				<p>The 2 apostles work on strict rules. Ask them yes/no game questions and unmask how they work! State their identities/rules clearly to end the game.</p>
+			</header>
+
+			<section class="hint-card">
+				<p class="objective"><strong>Objective:</strong> Find out the identities of the apostles! You can guess at their identity to Apostle A.</p>
+				<div class="win-controls">
+					<button id="win-btn" type="button" data-jigsaw-win data-puzzle-id="game-of-gods-v1" data-redirect-url="http://localhost:5173/arcade" data-status-target="#win-status">win</button>
+					<p id="win-status" aria-live="polite"></p>
+				</div>
+				<details class="hint-spoiler">
+					<summary>Hint #1</summary>
+					<p>They only respond to questions about the game itself! Ask them questions about their identities or how they interact with you!</p>
+				</details>
+				<details class="hint-spoiler">
+					<summary>Hint #2</summary>
+					<p>
+
+						Knights and knaves puzzle! With a twist! In other words, use true/false logic!
+						<a href="https://en.wikipedia.org/wiki/Knights_and_Knaves" target="_blank" rel="noopener noreferrer">Read about Knights and Knaves</a>
+					</p>
+				</details>
+				<details class="hint-spoiler">
+					<summary>Hint #3</summary>
+					<p>Don't bother asking 'Are you the Apostle of Truth?' Both will say yes. You need a question where their answers would contradict.</p>
+				</details>
+			</section>
+
+			<section class="chat-grid">
+				<article class="chat-card" data-chat="a">
+					<h2>Apostle A</h2>
+					<div class="messages" id="messages-a"></div>
+					<form class="composer" id="form-a">
+						<input id="input-a" type="text" placeholder="Ask Apostle A..." maxlength="240" required />
+						<button type="submit">send</button>
+					</form>
+				</article>
+
+				<article class="chat-card" data-chat="b">
+					<h2>Apostle B</h2>
+					<div class="messages" id="messages-b"></div>
+					<form class="composer" id="form-b">
+						<input id="input-b" type="text" placeholder="Ask Apostle B..." maxlength="240" required />
+						<button type="submit">send</button>
+					</form>
+				</article>
+			</section>
+		</main>
+
+		<script src="http://localhost:8787/games/sdk.js" defer></script>
+		<script type="module" src="/app.js"></script>
+	</body>
+</html>

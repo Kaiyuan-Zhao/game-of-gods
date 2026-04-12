@@ -1,8 +1,8 @@
 import { join } from 'path'
 
 const publicDir = join(import.meta.dir, 'public')
-const promptAPath = join(import.meta.dir, 'Unmasking Agent A Prompt.txt')
-const promptBPath = join(import.meta.dir, 'Unmasking Agent B Prompt.txt')
+const promptAPath = join(import.meta.dir, 'Agent A.txt')
+const promptBPath = join(import.meta.dir, 'Agent B.txt')
 
 const promptA = await Bun.file(promptAPath).text()
 const promptB = await Bun.file(promptBPath).text()

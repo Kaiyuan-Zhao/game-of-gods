@@ -23,6 +23,8 @@ if (!apiKey) {
 	console.warn('OPENAI_API_KEY (or API_KEY) is missing. Create a .env file from .env.example.')
 }
 
+const reasoningEffort = (process.env.OPENAI_REASONING_EFFORT || 'medium').trim()
+
 const port = Number(process.env.PORT || 3000)
 
 type Message = {
@@ -54,7 +56,8 @@ async function callOpenAI(systemPrompt: string, history: Message[], userMessage:
 	const openAIRequestBody = {
 		model: 'gpt-5.4',
 		messages: messages,
-		temperature: 0.7
+		reasoning_effort: reasoningEffort,
+		temperature: 1
 	}
 
 	const response = await fetch('https://api.openai.com/v1/chat/completions', {
